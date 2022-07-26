@@ -1,9 +1,7 @@
 import math
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoAlertPresentException, TimeoutException, NoSuchElementException
 from selenium.webdriver.support.wait import WebDriverWait
-from conftest import browser
 from pages.locators import BasePageLocators, BasketPageLocators
 
 
@@ -66,3 +64,6 @@ class BasePage():
         basket_btn = WebDriverWait(self.browser, 5).until(EC.element_to_be_clickable(BasePageLocators.BASKET_BTN))
         basket_btn.click()
 
+    def should_be_authorized_user(self):
+        assert self.is_element_present(*BasePageLocators.USER_ICON), "User icon is not presented," \
+                                                                     " probably unauthorised user"
